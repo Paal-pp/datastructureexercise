@@ -1,4 +1,5 @@
 from idlelib.tree import TreeNode
+from typing import List
 
 
 class data_structure_exercise(object):
@@ -144,6 +145,38 @@ class everday(object):
         root.right = self.insertIntoMaxTree(root.right, val)
         return root
 
+    def queensAttacktheKing(self, queens: List[List[int]], king: List[int]) -> List[List[int]]:
+        # 初始化一个列表来保存能攻击国王的皇后的位置
+        queensattack_list = []
+
+        # 将所有皇后的位置转换为一个集合，方便后续的查找操作
+        queens_set = set(tuple(q) for q in queens)
+
+        # 定义国王可能移动的8个方向（上、下、左、右以及对角线四个方向）
+        king_move = [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [-1, -1], [1, -1], [-1, 1]]
+
+        # 对每一个可能的移动方向进行遍历
+        for solomove in king_move:
+            # 获取国王的当前位置
+            x, y = king[0], king[1]
+
+            # 让国王按照当前方向移动一步
+            x, y = x + solomove[0], y + solomove[1]
+
+            # 在棋盘范围内持续移动，直到遇到皇后或移出棋盘
+            while 0 <= x < 8 and 0 <= y < 8:
+                # 如果在这个位置上有一个皇后
+                if (x, y) in queens_set:
+                    # 添加这个皇后的位置到结果列表中，并跳出循环查看下一个方向
+                    queensattack_list.append([x, y])
+                    break
+                else:
+                    # 如果这个位置没有皇后，那么让国王继续按照当前方向移动
+                    x, y = x + solomove[0], y + solomove[1]
+
+        # 返回能攻击国王的皇后的位置列表
+        return queensattack_list
+
 
 if __name__ == "__main__":
     main_class=data_structure_exercise()
@@ -154,4 +187,8 @@ if __name__ == "__main__":
     # q414 = main_class.thirdMax_414()
     # q628 =main_class.maximumProduct_628()
     # q645 = main_class.findErrorNums_645([5,3,4])
-    q998 = everday.insertIntoMaxTree_998()
+    # q998 = everday.insertIntoMaxTree_998()
+    queens = [[0,1],[1,0],[4,0],[0,4],[3,3],[2,4]]
+    king =[0,0]
+    q1222 = everday.queensAttacktheKing(queens=queens,king=king)
+    print(q1222)
