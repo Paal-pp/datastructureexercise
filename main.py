@@ -68,8 +68,6 @@ class data_structure_exercise(object):
         # print(thirdMax)
         # return thirdMax
 
-
-
     def maximumProduct_628(self):
         nums = [-4,-6,-3,4,9,5]
         nums.sort(reverse = True)
@@ -91,7 +89,6 @@ class data_structure_exercise(object):
         result= [err, rep]
         print(result)
         return result
-
 
 
 
@@ -177,6 +174,17 @@ class everday(object):
         # 返回能攻击国王的皇后的位置列表
         return queensattack_list
 
+    def makeFancyString(self, s: str) -> str:
+        if len(s) <= 2:
+            return s
+
+        n = len(s)
+        rec = s[:2]
+        for i in range(2, n):
+            if s[i] == rec[-1] and s[i] == rec[-2]:
+                continue
+            rec += s[i]
+        return rec
 
 if __name__ == "__main__":
     main_class=data_structure_exercise()
@@ -188,7 +196,4 @@ if __name__ == "__main__":
     # q628 =main_class.maximumProduct_628()
     # q645 = main_class.findErrorNums_645([5,3,4])
     # q998 = everday.insertIntoMaxTree_998()
-    queens = [[0,1],[1,0],[4,0],[0,4],[3,3],[2,4]]
-    king =[0,0]
-    q1222 = everday.queensAttacktheKing(queens=queens,king=king)
-    print(q1222)
+    # q1222 = everday.queensAttacktheKing()
